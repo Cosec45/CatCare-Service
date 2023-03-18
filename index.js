@@ -52,8 +52,8 @@ const cats = [
 
                                 {id:5, 
                                     name:'Jack',
-                                       adress:'Osaka',
-                                       country:'Japan',
+                                       adress:'italy',
+                                       country:'Rome',
                                         gender:'male',
                                         age:'adult',
                                         img:'https://www.animalfunfacts.net/images/stories/pets/cats/ragdoll_cat_sweet_l.jpg'
@@ -67,6 +67,24 @@ const cats = [
                                             age:'adult',
                                             img:'https://upload.wikimedia.org/wikipedia/commons/4/40/Odd-eyed_mi-ke-coated_Japanese_Bobtail_-_URK_cat_show_Vantaa_2006-10-08.JPG'
                                         },
+                                        
+                                        {id:7, 
+                                            name:'Villa',
+                                               adress:'Osaka',
+                                               country:'Japan',
+                                                gender:'male',
+                                                age:'adult',
+                                                img:'https://images.ctfassets.net/440y9b545yd9/5IMFGVDwhwv6TmaivHqKbn/41f23c17aa1a014f17da760d7df3fa33/Snowshoe850.jpg'
+                                            },
+
+                                            {id:8, 
+                                                name:'Zilla',
+                                                   adress:'Berlin',
+                                                   country:'Germany',
+                                                    gender:'female',
+                                                    age:'kitty',
+                                                    img:'https://www.omlet.us/images/cache/1024/682/Cat-Birman-A_seal_pointed_birman_kitten_with_very_blue_eyes.jpg'
+                                                },
 
 
                      ]
