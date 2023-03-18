@@ -47,7 +47,7 @@ const cats = [
                                    country:'Korea',
                                     gender:'female',
                                     age:'kitty',
-                                    img:'https://global-uploads.webflow.com/5f7adfe5ed7d773f90050d9e/6347a1d9549dfd57b376cd1a_persian%20cat%20101.webp'
+                                    img:'https://petmaya.com/wp-content/uploads/2015/01/famous-cat-07.jpg'
                                 },
 
                                 {id:5, 
@@ -56,7 +56,7 @@ const cats = [
                                        country:'Japan',
                                         gender:'male',
                                         age:'adult',
-                                        img:'https://www.thesprucepets.com/thmb/hWJWKdaC_aSEiJFh_E6_NJrJ0eE=/1500x0/filters:no_upscale():strip_icc()/american-curl-full-profile-history-and-care-4705972-hero-2c9bdcfba3d84130b8eed233c46c19d3.jpg'
+                                        img:'https://www.animalfunfacts.net/images/stories/pets/cats/ragdoll_cat_sweet_l.jpg'
                                     },
 
                                     {id:6, 
@@ -65,7 +65,7 @@ const cats = [
                                            country:'Japan',
                                             gender:'male',
                                             age:'adult',
-                                            img:'https://www.thesprucepets.com/thmb/hWJWKdaC_aSEiJFh_E6_NJrJ0eE=/1500x0/filters:no_upscale():strip_icc()/american-curl-full-profile-history-and-care-4705972-hero-2c9bdcfba3d84130b8eed233c46c19d3.jpg'
+                                            img:'https://upload.wikimedia.org/wikipedia/commons/4/40/Odd-eyed_mi-ke-coated_Japanese_Bobtail_-_URK_cat_show_Vantaa_2006-10-08.JPG'
                                         },
 
 
