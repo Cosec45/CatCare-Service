@@ -1,6 +1,9 @@
 const expressFunct = require('express')
 const expressObj = expressFunct()
 expressObj.use(expressFunct.json())
+const mongoose = require('mongoose')
+let catDb = null
+let userDb = null
 
 const cors = require('cors')
 
@@ -15,92 +18,78 @@ expressObj.use(
   })
 )
 
-const cats = [
-  {
-    id: 1,
-    name: 'Tigger',
-    adress: 'Boston',
-    country: 'USA',
-    gender: 'male',
-    age: 'kitty',
-    img: 'https://i.redd.it/z07m1ff6f3m61.jpg',
-  },
+expressObj.get('/api/cats', async function (req, res) {
+  res.send(await catDb.find())
+})
 
-  {
-    id: 2,
-    name: 'Zara',
-    adress: 'Oakland',
-    country: 'USA',
-    gender: 'female',
-    age: 'kitty',
-    img: 'https://www.litter-robot.com/media/blog/dan-wayman-exotic-shorthair3.jpg',
-  },
+expressObj.get('/api/cats/:id', async function (req, res) {
+  const id = req.params.id
+  const result = await catDb.find()
+  console.log(result)
+  res.send(...result.filter((acat) => acat.id == id))
+})
 
-  {
-    id: 3,
-    name: 'Baby',
-    adress: 'Osaka',
-    country: 'Japan',
-    gender: 'male',
-    age: 'adult',
-    img: 'https://www.thesprucepets.com/thmb/hWJWKdaC_aSEiJFh_E6_NJrJ0eE=/1500x0/filters:no_upscale():strip_icc()/american-curl-full-profile-history-and-care-4705972-hero-2c9bdcfba3d84130b8eed233c46c19d3.jpg',
-  },
+expressObj.post('/api/newuser', async function (req, res) {
+  
+  const obj = Object.assign({},req.body)
+  const user = {
+    fname: obj.body.name,
+    lname: obj.body.lname,
+    email: obj.body.email,
+    phone: obj.body.phone,
+    address: obj.body.address,
+    massage: obj.body.massage,
+  }
+  userDb.create(user).then((result) => {
+    console.log(result)
+  
+  })
 
-  {
-    id: 4,
-    name: 'Toby',
-    adress: 'Seoul',
-    country: 'Korea',
-    gender: 'female',
-    age: 'kitty',
-    img: 'https://petmaya.com/wp-content/uploads/2015/01/famous-cat-07.jpg',
-  },
-
-  {
-    id: 5,
-    name: 'Jack',
-    adress: 'italy',
-    country: 'Rome',
-    gender: 'male',
-    age: 'adult',
-    img: 'https://www.animalfunfacts.net/images/stories/pets/cats/ragdoll_cat_sweet_l.jpg',
-  },
-
-  {
-    id: 6,
-    name: 'Zilla',
-    adress: 'Osaka',
-    country: 'Japan',
-    gender: 'male',
-    age: 'adult',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/4/40/Odd-eyed_mi-ke-coated_Japanese_Bobtail_-_URK_cat_show_Vantaa_2006-10-08.JPG',
-  },
-
-  {
-    id: 7,
-    name: 'Villa',
-    adress: 'Osaka',
-    country: 'Japan',
-    gender: 'male',
-    age: 'adult',
-    img: 'https://images.ctfassets.net/440y9b545yd9/5IMFGVDwhwv6TmaivHqKbn/41f23c17aa1a014f17da760d7df3fa33/Snowshoe850.jpg',
-  },
-
-  {
-    id: 8,
-    name: 'Zilla',
-    adress: 'Berlin',
-    country: 'Germany',
-    gender: 'female',
-    age: 'kitty',
-    img: 'https://www.omlet.us/images/cache/1024/682/Cat-Birman-A_seal_pointed_birman_kitten_with_very_blue_eyes.jpg',
-  },
-]
-expressObj.get('/api/cats', function (req, res) {
-  res.send(cats)
+  // res.send(req.body)
+  res.send({"data":"สุดสวย"}) //api ต้องจบที่อันนี้ไม่งั้นแตก
 })
 
 const port = process.env.PORT || 3000
-expressObj.listen(port, function () {
+expressObj.listen(port, async function () {
   console.log(`Listening on port: `, port)
+  // mongodb://localhost:27017
+  console.log('connecting ...')
+  await mongoose.connect('mongodb://127.0.0.1:27017/catscareDB', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  const catSchema = mongoose.Schema({
+    // user: { type: Number },
+    // balance: { type: Number },
+    id: { type: Number },
+    name: { type: String },
+    address: { type: String },
+    country: { type: String },
+    gender: { type: String },
+    age: { type: String },
+    img: { type: String },
+  })
+  const userSchema = mongoose.Schema(
+    {
+      // user: { type: Number },
+      // balance: { type: Number },
+
+      fname: { type: String },
+      lname: { type: String },
+      email: { type: String },
+      phone: { type: String },
+      address: { type: String },
+      massage: { type: String },
+    },
+    {
+      versionKey: false, // You should be aware of the outcome after set to false
+    }
+  )
+  console.log('connection success')
+  catDb = mongoose.model('cats', new mongoose.Schema(catSchema), 'cats')
+  userDb = mongoose.model(
+    'user_adopt',
+    new mongoose.Schema(userSchema),
+    'user_adopt'
+  )
 })
